@@ -1,6 +1,6 @@
 {
   "name": "colorsys",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Bidirectional conversions between different colors format like RGB, HSL, HSV and HEX",
   "main": "color-converter.js",
   "scripts": {
