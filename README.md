@@ -4,8 +4,14 @@ Colorsys is a simple javascript color conversion library that allows conversion 
 
 ## install
 
+**With npm**
 ```
 npm install colorsys
+```
+
+**Load on browser or copy paste into your code**
+```
+<script src="http://netbeast.github.io/colorsys/browser.js"></script>
 ```
 
 ## api
