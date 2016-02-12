@@ -59,11 +59,10 @@ colorsys.hex_to_hsv('#ffffff')    //  { h: 0, s: 0, v: 100 }
 colorsys.rgb_to_hsv({r: 255, g: 255, b: 255 }) => { h: 0 , s: 0 , v: 100 }
 ````
 
-There are some formats missing like `YIQ`, `HWB`, `CMYK`, `ansii` and `ansi16`. Please help us to complete this library.
+There are some formats missing like `YIQ`, `HWB`, `CMYK`, `ansii` and `ansi16`. Please help us to complete this library making a pull request. 
 
 ## Contact
 * Visit our site [https://netbeast.co](https://netbeast.co)
 * Mail us: staff [at] netbeast.co
-* Report a bug or enter discussion at [issues](https://github.com/netbeast/docs/issues)
+* Report a bug or enter discussion at [issues](https://github.com/netbeast/colorsys/issues)
 * Other resources: [Docs](https://github.com/netbeast/docs/wiki), Netbeast [API](https://github.com/netbeast/API)
-
