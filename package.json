@@ -2,7 +2,7 @@
   "name": "colorsys",
   "version": "1.0.2",
   "description": "Bidirectional conversions between different colors format like RGB, HSL, HSV and HEX",
-  "main": "color-converter.js",
+  "main": "colorsys.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
