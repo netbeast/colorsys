@@ -1,0 +1,27 @@
+{
+  "name": "colorsys",
+  "description": "Bidirectional conversions between different colors format like RGB, HSL, HSV and HEX",
+  "main": "colorsys.js",
+  "authors": [
+    "pablo@netbeast.co"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "color",
+    "colour",
+    "rgb",
+    "hex",
+    "hsv",
+    "hsl",
+    "converter"
+  ],
+  "homepage": "https://github.com/netbeast/colorsys",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
