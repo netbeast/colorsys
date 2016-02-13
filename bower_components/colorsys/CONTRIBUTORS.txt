@@ -1,8 +1,0 @@
-This file contains a list of people who have made large contributions
-to npm colorsys package.
-
-Main author and function compiler:
-  Pablo Pizarro <pablo@netbeast.co>
-
-Browser version and repo fixes:
-  Jesus Rivera <jesus@netbeast.co>
