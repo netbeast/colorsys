@@ -11,9 +11,9 @@ colorsys.rgb2Hsl = function (r, g, b) {
     r = args.r; g = args.g; b = args.b;
   }
   // It converts [0,255] format, to [0,1]
-  r = r % RGB_MAX / parseFloat(RGB_MAX)
-  g = g % RGB_MAX / parseFloat(RGB_MAX)
-  b = b % RGB_MAX / parseFloat(RGB_MAX)
+  r = (r === RGB_MAX) ? 1 : (r % RGB_MAX / parseFloat(RGB_MAX))
+  g = (g === RGB_MAX) ? 1 : (g % RGB_MAX / parseFloat(RGB_MAX))
+  b = (b === RGB_MAX) ? 1 : (b % RGB_MAX / parseFloat(RGB_MAX))
 
   var max = Math.max(r, g, b)
   var min = Math.min(r, g, b)
@@ -57,9 +57,9 @@ colorsys.rgb2Hsv = function (r, g, b) {
   }
 
   // It converts [0,255] format, to [0,1]
-  r = r % RGB_MAX / parseFloat(RGB_MAX)
-  g = g % RGB_MAX / parseFloat(RGB_MAX)
-  b = b % RGB_MAX / parseFloat(RGB_MAX)
+  r = (r === RGB_MAX) ? 1 : (r % RGB_MAX / parseFloat(RGB_MAX))
+  g = (g === RGB_MAX) ? 1 : (g % RGB_MAX / parseFloat(RGB_MAX))
+  b = (b === RGB_MAX) ? 1 : (b % RGB_MAX / parseFloat(RGB_MAX))
 
   var max = Math.max(r, g, b)
   var min = Math.min(r, g, b)
