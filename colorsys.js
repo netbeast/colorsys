@@ -106,9 +106,9 @@ colorsys.hsl2Rgb = function (h, s, l) {
 
   var r, g, b
 
-  h = h === HUE_MAX ? 1 : (h % HUE_MAX / parseFloat(HUE_MAX) * 6)
-  s = s === SV_MAX ? 1 : (s % SV_MAX / parseFloat(SV_MAX))
-  l = l === SV_MAX ? 1 : (l % SV_MAX / parseFloat(SV_MAX))
+  h = (h === HUE_MAX) ? 1 : (h % HUE_MAX / parseFloat(HUE_MAX))
+  s = (s === SV_MAX) ? 1 : (s % SV_MAX / parseFloat(SV_MAX))
+  l = (l === SV_MAX) ? 1 : (l % SV_MAX / parseFloat(SV_MAX))
 
   if (s === 0) {
     r = g = b = l // achromatic
@@ -140,9 +140,9 @@ colorsys.hsv2Rgb = function (h, s, v) {
     h = args.h; s = args.s; v = args.v;
   }
 
-  h = h === HUE_MAX ? 1 : (h % HUE_MAX / parseFloat(HUE_MAX) * 6)
-  s = s === SV_MAX ? 1 : (s % SV_MAX / parseFloat(SV_MAX))
-  v = v === SV_MAX ? 1 : (v % SV_MAX / parseFloat(SV_MAX))
+  h = (h === HUE_MAX) ? 1 : (h % HUE_MAX / parseFloat(HUE_MAX) * 6)
+  s = (s === SV_MAX) ? 1 : (s % SV_MAX / parseFloat(SV_MAX))
+  v = (v === SV_MAX) ? 1 : (v % SV_MAX / parseFloat(SV_MAX))
 
   var i = Math.floor(h)
   var f = h - i
