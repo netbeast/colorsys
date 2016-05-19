@@ -99,7 +99,7 @@ colorsys.rgb_to_hsv = colorsys.rgb2Hsv
 colorsys.rgbToHsv = colorsys.rgb2Hsv
 
 colorsys.hsl2Rgb = function (h, s, l) {
-  if (typeof r === 'object') {
+  if (typeof h === 'object') {
     const args = h
     h = args.h; s = args.s; l = args.l;
   }
