@@ -136,7 +136,7 @@ colorsys.hslToRgb = colorsys.hsl2Rgb
 
 colorsys.hsv2Rgb = function (h, s, v) {
   if (typeof h === 'object') {
-    const args = r
+    const args = h
     h = args.h; s = args.s; v = args.v;
   }
 
