@@ -222,3 +222,42 @@ colorsys.hex2Hsl = function (hex) {
 
 colorsys.hex_to_hsl = colorsys.hex2Hsl
 colorsys.hexToHsl = colorsys.hex2Hsl
+
+colorsys.rgb2cmyk = function (r, g, b) {
+
+  var rprim = r/255
+  var gprim = g/255
+  var bprim = b/255 
+
+  var k = 1-Math.max(rprim,gprim,bprim)
+
+  var c = (1-rprim-k)/(1-k)
+  var m = (1-gprim-k)/(1-k)
+  var y = (1-bprim-k)/(1-k)
+
+  return [{
+    c: c.toFixed(3),
+    m: m.toFixed(3),
+    y: y.toFixed(3),
+    k: k.toFixed(3)
+  }]
+}
+
+colorsys.rgb_to_cmyk = colorsys.rgb2cmyk
+colorsys.rgbTocmyk = colorsys.rgb2cmyk
+
+colorsys.cmyk2rgb = function (c, m, y, k) {
+
+  var r = 255*(1-c)*(1-k)
+  var g = 255*(1-m)*(1-k)
+  var b = 255*(1-y)*(1-k)
+
+  return [{
+    r: Math.floor(r),
+    g: Math.floor(g),
+    b: Math.floor(b)
+  }]
+}
+
+colorsys.cmyk_to_rgb = colorsys.cmyk2rgb
+colorsys.cmykTorgb = colorsys.cmyk2rgb
