@@ -17,9 +17,7 @@ colorsys.rgb2Hsl = function (r, g, b) {
 
   var max = Math.max(r, g, b)
   var min = Math.min(r, g, b)
-  var h
-  var s
-  var l = (max + min) / 2
+  var h, s, l = (max + min) / 2
 
   if (max === min) {
     h = s = 0 // achromatic
@@ -47,8 +45,7 @@ colorsys.rgb2Hsl = function (r, g, b) {
   }]
 }
 
-colorsys.rgb_to_hsl = colorsys.rgb2Hsl
-colorsys.rgbToHsl = colorsys.rgb2Hsl
+colorsys.rgb_to_hsl = colorsys.rgbToHsl = colorsys.rgb2Hsl
 
 colorsys.rgb2Hsv = function (r, g, b) {
   if (typeof r === 'object') {
@@ -63,9 +60,7 @@ colorsys.rgb2Hsv = function (r, g, b) {
 
   var max = Math.max(r, g, b)
   var min = Math.min(r, g, b)
-  var h
-  var s
-  var v = max
+  var h, s, v = max
 
   var d = max - min
 
@@ -95,8 +90,7 @@ colorsys.rgb2Hsv = function (r, g, b) {
   }]
 }
 
-colorsys.rgb_to_hsv = colorsys.rgb2Hsv
-colorsys.rgbToHsv = colorsys.rgb2Hsv
+colorsys.rgb_to_hsv = colorsys.rgbToHsv = colorsys.rgb2Hsv
 
 colorsys.hsl2Rgb = function (h, s, l) {
   if (typeof h === 'object') {
@@ -131,8 +125,7 @@ colorsys.hsl2Rgb = function (h, s, l) {
   return { r: Math.round(r * RGB_MAX), g: Math.round(g * RGB_MAX), b: Math.round(b * RGB_MAX) }
 }
 
-colorsys.hsl_to_rgb = colorsys.hsl2Rgb
-colorsys.hslToRgb = colorsys.hsl2Rgb
+colorsys.hsl_to_rgb = colorsys.hslToRgb = colorsys.hsl2Rgb
 
 colorsys.hsv2Rgb = function (h, s, v) {
   if (typeof h === 'object') {
@@ -176,8 +169,7 @@ colorsys.rgb2Hex = function (r, g, b) {
   return '#' + r + g + b
 }
 
-colorsys.rgb_to_hex = colorsys.rgb2Hex
-colorsys.rgbToHex = colorsys.rgb2Hex
+colorsys.rgb_to_hex = colorsys.rgbToHex = colorsys.rgb2Hex
 
 colorsys.hex2Rgb = function (hex) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
@@ -188,8 +180,7 @@ colorsys.hex2Rgb = function (hex) {
   } : null
 }
 
-colorsys.hex_to_rgb = colorsys.hex2Rgb
-colorsys.hexToRgb = colorsys.hex2Rgb
+colorsys.hex_to_rgb = colorsys.hexToRgb = colorsys.hex2Rgb
 
 colorsys.hsv2Hex = function (h, s, v) {
   var rgb = colorsys.hsv2Rgb(h, s, v)
@@ -204,24 +195,21 @@ colorsys.hex2Hsv = function (hex) {
   return colorsys.rgb2Hsv(rgb.r, rgb.g, rgb.b)[0]
 }
 
-colorsys.hex_to_hsv = colorsys.hex2Hsv
-colorsys.hexToHsv = colorsys.hex2Hsv
+colorsys.hex_to_hsv = colorsys.hexToHsv = colorsys.hex2Hsv
 
 colorsys.hsl2Hex = function (h, s, l) {
   var rgb = colorsys.hsl2Rgb(h, s, l)
   return colorsys.rgb2Hex(rgb.r, rgb.g, rgb.b)
 }
 
-colorsys.hsl_to_hex = colorsys.hsl2Hex
-colorsys.hslToHex = colorsys.hsl2Hex
+colorsys.hsl_to_hex = colorsys.hslToHex = colorsys.hsl2Hex
 
 colorsys.hex2Hsl = function (hex) {
   var rgb = colorsys.hex2Rgb(hex)
   return colorsys.rgb2Hsl(rgb.r, rgb.g, rgb.b)[0]
 }
 
-colorsys.hex_to_hsl = colorsys.hex2Hsl
-colorsys.hexToHsl = colorsys.hex2Hsl
+colorsys.hex_to_hsl = colorsys.hexToHsl = colorsys.hex2Hsl
 
 colorsys.rgb2cmyk = function (r, g, b) {
 
@@ -243,8 +231,7 @@ colorsys.rgb2cmyk = function (r, g, b) {
   }]
 }
 
-colorsys.rgb_to_cmyk = colorsys.rgb2cmyk
-colorsys.rgbTocmyk = colorsys.rgb2cmyk
+colorsys.rgb_to_cmyk = colorsys.rgbTocmyk = colorsys.rgb2cmyk
 
 colorsys.cmyk2rgb = function (c, m, y, k) {
 
@@ -259,5 +246,4 @@ colorsys.cmyk2rgb = function (c, m, y, k) {
   }]
 }
 
-colorsys.cmyk_to_rgb = colorsys.cmyk2rgb
-colorsys.cmykTorgb = colorsys.cmyk2rgb
+colorsys.cmyk_to_rgb = colorsys.cmykTorgb = colorsys.cmyk2rgb
