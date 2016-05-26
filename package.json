@@ -4,8 +4,14 @@
   "main": "colorsys.js",
   "version": "1.0.7",
   "authors": [
-    "pablo@netbeast.co"
+    "pablo@netbeast.co",
+    "jesus@netbeast.co"
   ],
+  "scripts": {
+    "release:major": "npm version major && npm publish && git push --follow-tags",
+    "release:minor": "npm version minor && npm publish && git push --follow-tags",
+    "release:patch": "npm version patch && npm publish && git push --follow-tags"
+  },
   "license": "ISC",
   "keywords": [
     "color",
