@@ -54,7 +54,7 @@ colorsys.hex_to_rgb('#ffffff') => { r: 255, g: 255, b: 255 }
 aliases: _hex2Rgb_, _hexToRgb_
 
 ```
-colorsys.hsv_to_hex({ r: 255, g: 255, b: 255 }) => '#ffffff'
+colorsys.hsv_to_hex({ h: 0, s: 0, v: 100 }) => '#ffffff'
 ```
 
 aliases: _hsv2Hex_, _hsvToHex_
