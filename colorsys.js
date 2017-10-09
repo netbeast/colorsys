@@ -38,11 +38,11 @@ colorsys.rgb2Hsl = function (r, g, b) {
     h /= 6
   }
 
-  return [{
+  return {
     h: Math.floor(h * HUE_MAX),
     s: Math.floor(s * SV_MAX),
     l: Math.floor(l * SV_MAX)
-  }]
+  }
 }
 
 colorsys.rgb_to_hsl = colorsys.rgbToHsl = colorsys.rgb2Hsl
@@ -83,11 +83,11 @@ colorsys.rgb2Hsv = function (r, g, b) {
     h /= 6
   }
 
-  return [{
+  return {
     h: Math.floor(h * HUE_MAX),
     s: Math.floor(s * SV_MAX),
     v: Math.floor(v * SV_MAX)
-  }]
+  }
 }
 
 colorsys.rgb_to_hsv = colorsys.rgbToHsv = colorsys.rgb2Hsv
@@ -212,38 +212,87 @@ colorsys.hex2Hsl = function (hex) {
 colorsys.hex_to_hsl = colorsys.hexToHsl = colorsys.hex2Hsl
 
 colorsys.rgb2cmyk = function (r, g, b) {
+  if (typeof r === 'object') {
+    const args = r
+    r = args.r; g = args.g; b = args.b;
+  }
 
-  var rprim = r/255
-  var gprim = g/255
-  var bprim = b/255 
+  var rprim = r / 255
+  var gprim = g / 255
+  var bprim = b / 255
 
-  var k = 1-Math.max(rprim,gprim,bprim)
+  var k = 1 - Math.max(rprim, gprim, bprim)
 
-  var c = (1-rprim-k)/(1-k)
-  var m = (1-gprim-k)/(1-k)
-  var y = (1-bprim-k)/(1-k)
+  var c = (1 - rprim - k) / (1 - k)
+  var m = (1 - gprim - k) / (1 - k)
+  var y = (1 - bprim - k) / (1 - k)
 
-  return [{
+  return {
     c: c.toFixed(3),
     m: m.toFixed(3),
     y: y.toFixed(3),
     k: k.toFixed(3)
-  }]
+  }
 }
 
-colorsys.rgb_to_cmyk = colorsys.rgbTocmyk = colorsys.rgb2cmyk
+colorsys.rgb_to_cmyk = colorsys.rgbToCmyk = colorsys.rgb2Cmyk
 
 colorsys.cmyk2rgb = function (c, m, y, k) {
+  if (typeof c === 'object') {
+    const args = c
+    c = args.c; m = args.m; y = args.y; k = args.k;
+  }
 
-  var r = 255*(1-c)*(1-k)
-  var g = 255*(1-m)*(1-k)
-  var b = 255*(1-y)*(1-k)
+  var r = 255 * (1 - c) * (1 - k)
+  var g = 255 * (1 - m) * (1 - k)
+  var b = 255 * (1 - y) * (1 - k)
 
-  return [{
+  return {
     r: Math.floor(r),
     g: Math.floor(g),
     b: Math.floor(b)
-  }]
+  }
 }
 
-colorsys.cmyk_to_rgb = colorsys.cmykTorgb = colorsys.cmyk2rgb
+colorsys.cmyk_to_rgb = colorsys.cmykToRgb = colorsys.cmyk2Rgb
+
+colorsys.hsv2Hsl = function (h, s, v) {
+  if (typeof h === 'object') {
+    const args = h
+    h = args.h; s = args.s; v = args.v;
+  }
+
+  var l = (2 - s) * v / 2
+
+  if (l !== 0) {
+    if (l === SV_MAX) {
+      s = 0
+    } else if (l < SV_MAX / 2) {
+      s = s * v / (l * 2)
+    } else {
+      s = s * v / (2 - l * 2)
+    }
+  }
+
+  return { h, s, l }
+}
+
+colorsys.hsv_to_hsl = colorsys.hsvToHsl = colorsys.hsv2Hsl
+
+colorsys.hsl2Hsv = function (h, s, l) {
+  if (typeof h === 'object') {
+    const args = h
+    h = args.h; s = args.s; l = args.l;
+  }
+
+  s = s * (l < 50 ? l : (100 - l))
+
+  return {
+    h: h,
+    s: Math.floor(2 * s / (l + s)),
+    v: Math.floor(l + s),
+  }
+}
+
+colorsys.hsl_to_hsv = colorsys.hslToHsv = colorsys.hsl2Hsv
+
