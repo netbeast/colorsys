@@ -192,7 +192,7 @@ colorsys.hsvToHex = colorsys.hsv2Hex
 
 colorsys.hex2Hsv = function (hex) {
   var rgb = colorsys.hex2Rgb(hex)
-  return colorsys.rgb2Hsv(rgb.r, rgb.g, rgb.b)[0]
+  return colorsys.rgb2Hsv(rgb.r, rgb.g, rgb.b)
 }
 
 colorsys.hex_to_hsv = colorsys.hexToHsv = colorsys.hex2Hsv
@@ -206,7 +206,7 @@ colorsys.hsl_to_hex = colorsys.hslToHex = colorsys.hsl2Hex
 
 colorsys.hex2Hsl = function (hex) {
   var rgb = colorsys.hex2Rgb(hex)
-  return colorsys.rgb2Hsl(rgb.r, rgb.g, rgb.b)[0]
+  return colorsys.rgb2Hsl(rgb.r, rgb.g, rgb.b)
 }
 
 colorsys.hex_to_hsl = colorsys.hexToHsl = colorsys.hex2Hsl
