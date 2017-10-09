@@ -11,7 +11,7 @@ npm install colorsys
 
 **Load on browser or copy paste into your code**
 ```
-<script src="http://netbeast.github.io/colorsys/browser.js"></script>
+<script src="https://unpkg.com/colorsys@1.0.11/colorsys.js"></script>
 ```
 
 ## api
