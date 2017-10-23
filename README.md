@@ -1,7 +1,8 @@
 # colorsys
+[![CircleCI](https://circleci.com/gh/netbeast/colorsys.svg?style=svg)](https://circleci.com/gh/netbeast/colorsys)
 
 Colorsys is a simple javascript color conversion library that allows bidirectional color conversion.
-Lightweight, immutable. RGB, HEX, HSV, HSL and CMYK.
+Lightweight, immutable. With support for RGB, HEX, HSV, HSL and CMYK and CSS strings.
 
 ## install
 
