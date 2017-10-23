@@ -318,3 +318,15 @@ colorsys.parseCss = function (cssString) {
 
 colorsys.parse_css = colorsys.parseCss
 
+colorsys.stringify = function (obj) {
+  const prefix = Object.keys(obj).join('')
+  const values = Object.keys(obj).map(function (key) {
+    let val = obj[key]
+    if (key === 's' || key === 'v' || key === 'l') {
+      val = val + '%'
+    }
+    return val
+  })
+  return prefix + '(' + values.join(', ') + ')'
+}
+

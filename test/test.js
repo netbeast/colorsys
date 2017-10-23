@@ -30,5 +30,12 @@ describe('colorsys', function() {
     const hexParsed = colorsys.parseCss('#aacc33')
     expect(hexParsed).to.deep.equal(colorsys.hex2Rgb('#aacc33'))
   })
+
+  it('should stringify color objects', function () {
+    const rgbObj = colorsys.parseCss('#aacc33')
+    expect(colorsys.stringify(rgbObj)).to.equal('rgb(170, 204, 51)')
+    const hsvObj = colorsys.rgb2Hsv(rgbObj)
+    expect(colorsys.stringify(hsvObj)).to.equal('hsv(73, 75%, 80%)')
+  })
 })
 
