@@ -296,3 +296,25 @@ colorsys.hsl2Hsv = function (h, s, l) {
 
 colorsys.hsl_to_hsv = colorsys.hslToHsv = colorsys.hsl2Hsv
 
+/**
+* Parses values from a string into a javascript object
+* e.g: hsla(140, 30%, 40%, .5) => { h: 140, s: 30, l: 40, alpha: 0.5}
+*/
+colorsys.parseCss = function (cssString) {
+  if (cssString.indexOf('#') > -1) {
+    return colorsys.hex2Rgb(cssString)
+  }
+
+  const prefix = cssString.split('(')[0]
+  const args = cssString.split('(')[1].split(')')[0].split(',')
+
+  // Use the prefix as an array [r, g, b, a] to parse the colours
+  return prefix.split('').reduce(function (color, param, idx) {
+    const nextColor = color
+    nextColor[param] = parseFloat(args[idx])
+    return nextColor
+  }, {})
+}
+
+colorsys.parse_css = colorsys.parseCss
+
