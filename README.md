@@ -1,6 +1,7 @@
 # colorsys
 
-Colorsys is a simple javascript color conversion library that allows conversion between RGB, HSL, HSV and HEX
+Colorsys is a simple javascript color conversion library that allows bidirectional color conversion.
+Lightweight, immutable. RGB, HEX, HSV, HSL and CMYK.
 
 ## install
 
