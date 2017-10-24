@@ -20,6 +20,30 @@ describe('colorsys', function() {
     expect(rgb).to.deep.equal({ r: 255, g: 0, b: 255 })
   })
 
+  /* There is a small deviation when using negative angles */
+  it('should convert hex <-> hsv', function () {
+    const blueHsv = { h: 230, s: 80, v: 100 }
+    const blueHex = '#3456fe'
+    expect(colorsys.hex2Hsv(blueHex)).to.deep.equal(blueHsv)
+  })
+
+  /* There is a small deviation when using negative angles */
+  it('should convert hex <-> hsv', function () {
+    const blueHsv = { h: 230, s: 80, v: 100 }
+    const blueHex = '#3456fe'
+    expect(colorsys.hex2Hsv(blueHex)).to.deep.equal(blueHsv)
+  })
+
+  it('should convert saturated hues to white', function () {
+    const hsv = { h: 147, s: 0, v: 100 }
+    const hsl = { h: 147, s: 0, l: 100 }
+    const cmyk = { c: 0, m: 0, y: 0, k: 0 }
+    const white = { r: 255, g: 255, b: 255 }
+    expect(colorsys.hsv2Rgb(hsv)).to.deep.equal(white)
+    expect(colorsys.hsl2Rgb(hsl)).to.deep.equal(white)
+    expect(colorsys.cmyk2Rgb(cmyk)).to.deep.equal(white)
+  })
+
   it('should parse from css', function () {
     const expectedHsla = { h: 140, s: 30, l: 21, a: 0.5 }
     const hslaString = 'hsla(140, 30%, 21%, .5)'
@@ -36,6 +60,16 @@ describe('colorsys', function() {
     expect(colorsys.stringify(rgbObj)).to.equal('rgb(170, 204, 51)')
     const hsvObj = colorsys.rgb2Hsv(rgbObj)
     expect(colorsys.stringify(hsvObj)).to.equal('hsv(73, 75%, 80%)')
+  })
+
+  /* There is a small deviation when using negative angles */
+  it('should handle negative angles', function () {
+    const blueHsl = { h: -130, s: 99, l: 60 }
+    const blueHex = '#3456fe'
+    const greenHsv = { h: 127, s: 73, v: 96 }
+    const greenRgb = { r: 66, g: 244, b: 86 }
+    expect(colorsys.hsl2Hex(blueHsl)).to.equal(blueHex)
+    expect(colorsys.hsv2Rgb(greenHsv)).to.deep.equal(greenRgb)
   })
 })
 

@@ -39,9 +39,9 @@ colorsys.rgb2Hsl = function (r, g, b) {
   }
 
   return {
-    h: Math.floor(h * HUE_MAX),
-    s: Math.floor(s * SV_MAX),
-    l: Math.floor(l * SV_MAX)
+    h: Math.round(h * HUE_MAX),
+    s: Math.round(s * SV_MAX),
+    l: Math.round(l * SV_MAX)
   }
 }
 
@@ -84,9 +84,9 @@ colorsys.rgb2Hsv = function (r, g, b) {
   }
 
   return {
-    h: Math.floor(h * HUE_MAX),
-    s: Math.floor(s * SV_MAX),
-    v: Math.floor(v * SV_MAX)
+    h: Math.round(h * HUE_MAX),
+    s: Math.round(s * SV_MAX),
+    v: Math.round(v * SV_MAX)
   }
 }
 
@@ -100,6 +100,7 @@ colorsys.hsl2Rgb = function (h, s, l) {
 
   var r, g, b
 
+  h = _normalizeAngle(h)
   h = (h === HUE_MAX) ? 1 : (h % HUE_MAX / parseFloat(HUE_MAX))
   s = (s === SV_MAX) ? 1 : (s % SV_MAX / parseFloat(SV_MAX))
   l = (l === SV_MAX) ? 1 : (l % SV_MAX / parseFloat(SV_MAX))
@@ -107,22 +108,18 @@ colorsys.hsl2Rgb = function (h, s, l) {
   if (s === 0) {
     r = g = b = l // achromatic
   } else {
-    var hue2rgb = function hue2rgb (p, q, t) {
-      if (t < 0) t += 1
-      if (t > 1) t -= 1
-      if (t < 1 / 6) return p + (q - p) * 6 * t
-      if (t < 1 / 2) return q
-      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
-      return p
-    }
-
-    var q = l < 0.5 ? l * (1 + s) : l + s - l * s
-    var p = 2 * l - q
-    r = hue2rgb(p, q, h + 1 / 3)
-    g = hue2rgb(p, q, h)
-    b = hue2rgb(p, q, h - 1 / 3)
+    var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    var p = 2 * l - q;
+    r = _hue2Rgb(p, q, h + 1 / 3)
+    g = _hue2Rgb(p, q, h)
+    b = _hue2Rgb(p, q, h - 1 / 3)
   }
-  return { r: Math.round(r * RGB_MAX), g: Math.round(g * RGB_MAX), b: Math.round(b * RGB_MAX) }
+
+  return {
+    r: Math.round(r * RGB_MAX),
+    g: Math.round(g * RGB_MAX),
+    b: Math.round(b * RGB_MAX),
+  }
 }
 
 colorsys.hsl_to_rgb = colorsys.hslToRgb = colorsys.hsl2Rgb
@@ -133,6 +130,7 @@ colorsys.hsv2Rgb = function (h, s, v) {
     h = args.h; s = args.s; v = args.v;
   }
 
+  h = _normalizeAngle(h)
   h = (h === HUE_MAX) ? 1 : (h % HUE_MAX / parseFloat(HUE_MAX) * 6)
   s = (s === SV_MAX) ? 1 : (s % SV_MAX / parseFloat(SV_MAX))
   v = (v === SV_MAX) ? 1 : (v % SV_MAX / parseFloat(SV_MAX))
@@ -147,7 +145,11 @@ colorsys.hsv2Rgb = function (h, s, v) {
   var g = [t, v, v, q, p, p][mod]
   var b = [p, p, t, v, v, q][mod]
 
-  return { r: Math.round(r * RGB_MAX), g: Math.round(g * RGB_MAX), b: Math.round(b * RGB_MAX) }
+  return {
+    r: Math.floor(r * RGB_MAX),
+    g: Math.floor(g * RGB_MAX),
+    b: Math.floor(b * RGB_MAX),
+  }
 }
 
 colorsys.hsv_to_rgb = colorsys.hsv2Rgb
@@ -211,7 +213,7 @@ colorsys.hex2Hsl = function (hex) {
 
 colorsys.hex_to_hsl = colorsys.hexToHsl = colorsys.hex2Hsl
 
-colorsys.rgb2cmyk = function (r, g, b) {
+colorsys.rgb2Cmyk = function (r, g, b) {
   if (typeof r === 'object') {
     const args = r
     r = args.r; g = args.g; b = args.b;
@@ -237,7 +239,7 @@ colorsys.rgb2cmyk = function (r, g, b) {
 
 colorsys.rgb_to_cmyk = colorsys.rgbToCmyk = colorsys.rgb2Cmyk
 
-colorsys.cmyk2rgb = function (c, m, y, k) {
+colorsys.cmyk2Rgb = function (c, m, y, k) {
   if (typeof c === 'object') {
     const args = c
     c = args.c; m = args.m; y = args.y; k = args.k;
@@ -330,3 +332,15 @@ colorsys.stringify = function (obj) {
   return prefix + '(' + values.join(', ') + ')'
 }
 
+function _normalizeAngle (degrees) {
+  return (degrees % 360 + 360) % 360;
+}
+
+function _hue2Rgb (p, q, t) {
+  if (t < 0) t += 1
+  if (t > 1) t -= 1
+  if (t < 1 / 6) return p + (q - p) * 6 * t
+  if (t < 1 / 2) return q
+  if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
+  return p
+}
