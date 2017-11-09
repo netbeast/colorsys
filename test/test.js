@@ -16,6 +16,8 @@ describe('colorsys', function() {
   it('should convert hex <-> rgb', function() {
     const hex = colorsys.rgb_to_hex({ r: 255, g: 0, b: 255 })
     expect(hex).to.equal('#ff00ff')
+    expect(colorsys.hex_to_rgb('#66d7a9'))
+      .to.deep.equal({r: 102, g: 215, b: 169})
     const rgb = colorsys.hex_to_rgb(hex)
     expect(rgb).to.deep.equal({ r: 255, g: 0, b: 255 })
   })
