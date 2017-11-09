@@ -337,6 +337,17 @@ colorsys.random = function () {
   return '#' + Math.floor(Math.random() * 16777215).toString(16)
 }
 
+colorsys.rotateHue = (hue, amount = 0) => {
+  const aux = typeof hue === 'object'
+    ? (hue.h + amount) % 360
+    : (hue + amount) % 360
+
+  const nextHue = aux < 0 ? (360 + aux) : aux
+  return typeof hue === 'object'
+    ? Object.assign(hue, { h: nextHue })
+    : nextHue
+}
+
 function _normalizeAngle (degrees) {
   return (degrees % 360 + 360) % 360;
 }

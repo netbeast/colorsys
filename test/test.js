@@ -1,6 +1,6 @@
 
 const colorsys = require('../colorsys')
-const chai = require('chai');
+const chai = require('chai')
 
 chai.should()
 const expect = chai.expect
@@ -78,6 +78,17 @@ describe('colorsys', function() {
     expect(hex.length).to.equal(7)
     expect(hex[0]).to.equal('#')
     expect(colorsys.hex2Hsl(hex)).to.deep.equal(colorsys.rgb2Hsl(rgb))
+  })
+
+  it('should rotate hue returning a number within 360º', function () {
+    const hsl = { h: 280, s: 100, l: 50 }
+    const hsv = { h: 0, s: 100, l: 50 }
+
+    expect(colorsys.rotateHue(140)).to.equal(140)
+    expect(colorsys.rotateHue(120, 240)).to.equal(0)
+    expect(colorsys.rotateHue(160, -400)).to.equal(120)
+    expect(colorsys.rotateHue(hsl, 130)).to.contain({h: 50})
+    expect(colorsys.rotateHue(hsv, -324)).to.contain({h: 36})
   })
 })
 
