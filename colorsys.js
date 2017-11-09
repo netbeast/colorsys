@@ -332,6 +332,11 @@ colorsys.stringify = function (obj) {
   return prefix + '(' + values.join(', ') + ')'
 }
 
+// Will return a random hex colour
+colorsys.random = function () {
+  return '#' + Math.floor(Math.random() * 16777215).toString(16)
+}
+
 function _normalizeAngle (degrees) {
   return (degrees % 360 + 360) % 360;
 }

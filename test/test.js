@@ -71,5 +71,13 @@ describe('colorsys', function() {
     expect(colorsys.hsl2Hex(blueHsl)).to.equal(blueHex)
     expect(colorsys.hsv2Rgb(greenHsv)).to.deep.equal(greenRgb)
   })
+
+  it('should create a random colour in hex', function () {
+    const hex = colorsys.random()
+    const rgb = colorsys.hex2Rgb(hex)
+    expect(hex.length).to.equal(7)
+    expect(hex[0]).to.equal('#')
+    expect(colorsys.hex2Hsl(hex)).to.deep.equal(colorsys.rgb2Hsl(rgb))
+  })
 })
 
