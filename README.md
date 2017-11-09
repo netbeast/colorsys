@@ -19,7 +19,7 @@ npm install colorsys
 
 
 ## example
-```
+```javascript
 var colorsys = require('colorsys')
 const hsl = colorsys.parseCss('hsl(0, 0%, 100%)') //  { h: 0, s: 0, l: 100 }
 colorsys.hsl2Hex(hsl) // '#ffffff'
