@@ -51,6 +51,11 @@ Try with any combination. Look at the [source](colorsys.js) to double check!
 * `colorsys.rgb2cmyk`
 * `colorsys.cmyk2rgb`
 
+Other methods:
+* Generate a random hex color: `colorsys.random()`
+* Rotate a color hue: `colorsys.rotateHue(120, 120)` will output `240`.
+You can also use HSL or HSV objects as `rotateHue(hsv, 120)` will output
+an object containing `{h: 240}`.
 
 There are some formats missing like `YIQ`, `HWB`, `ansii` and `ansi16`. Please help us to complete this library making a pull request. 
 
