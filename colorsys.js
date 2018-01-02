@@ -276,7 +276,7 @@ colorsys.hsv2Hsl = function (h, s, v) {
     }
   }
 
-  return { h, s, l }
+  return { h: h, s: s, l: l }
 }
 
 colorsys.hsv_to_hsl = colorsys.hsvToHsl = colorsys.hsv2Hsl
