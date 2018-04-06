@@ -324,7 +324,7 @@ colorsys.stringify = function (obj) {
   const prefix = Object.keys(obj).join('')
   const values = Object.keys(obj).map(function (key) {
     var val = obj[key]
-    if (key === 's' || key === 'v' || key === 'l') {
+    if (key === 's' || key === 'v' || key === 'l') {
       val = val + '%'
     }
     return val
