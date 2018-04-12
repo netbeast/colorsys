@@ -324,7 +324,7 @@ colorsys.stringify = function (obj) {
   const prefix = Object.keys(obj).join('')
   const values = Object.keys(obj).map(function (key) {
     var val = obj[key]
-    if (key === 's' || key === 'v' || key === 'l') {
+    if (key === 's' || key === 'v' || key === 'l') {
       val = val + '%'
     }
     return val
@@ -351,6 +351,38 @@ colorsys.rotateHue = function (hue, amount) {
       : nextHue
 }
 
+
+colorsys.getColorEncoding = function (color) {
+  if (typeof color === 'string') {
+    try {
+      colorsys.hex2Rgb(color)
+      return 'hex'
+    } catch (err) { /* Silent catch */ }
+  }
+
+  if (typeof color !== 'object') {
+    return 'unknown'
+  }
+
+  if (color.r && color.g && color.b) {
+    return 'rgb'
+  }
+
+  if (color.h && color.s && color.v) {
+    return 'hsv'
+  }
+
+  if (color.h && color.s && color.l) {
+    return 'hsl'
+  }
+
+  if (color.c && color.m && color.y && color.k) {
+    return 'cmyk'
+  }
+
+  return 'unknown'
+}
+
 function _normalizeAngle (degrees) {
   return (degrees % 360 + 360) % 360;
 }
@@ -363,3 +395,37 @@ function _hue2Rgb (p, q, t) {
   if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
   return p
 }
+
+// TODO:
+// Create darken / lighten methods with same input/output format
+
+//
+// colorsys.darken = function (color) {
+//   const colorEncoding = colorsys.getColorEncoding(color)
+//   if (colorEncoding === 'unknown') {
+//     return color
+//   }
+
+//   const hsv = _getColorInHsv(color)
+//   return 
+// }
+
+//
+// function _getColorInHsv (color) {
+//   const colorEncoding = colorsys.getColorEncoding(color)
+
+//   switch (colorEncoding) {
+//     case 'hsv':
+//       return color
+//     case 'rgb':
+//       return rgb2Hsv(color)
+//     case 'hex':
+//       return hex2Hsv(color)
+//     case 'hsl':
+//       return hsl2Hsv(color)
+//     case 'cmyk':
+//       return rgb2Hsv(cmyk2Rgb(color))
+//     default:
+//       return 'unknown'
+//   }
+// }

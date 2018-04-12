@@ -92,5 +92,14 @@ describe('colorsys', function() {
     expect(colorsys.rotateHue(hsl, 130)).to.contain({h: 50})
     expect(colorsys.rotateHue(hsv, -324)).to.contain({h: 36})
   })
+
+  it('should retrieve the correct stringEnconding', function () {
+    expect(colorsys.getColorEncoding({r: 12, g: 14, b: 18})).to.equal('rgb')
+    expect(colorsys.getColorEncoding(colorsys.random())).to.equal('hex')
+    expect(colorsys.getColorEncoding({h: 150, s: 0.2, v: 0.5})).to.equal('hsv')
+    expect(colorsys.getColorEncoding({h: 150, s: 0.2, l: 0.5})).to.equal('hsl')
+    expect(colorsys.getColorEncoding({j: 150, f: 0.2, r: 0.5})).to.equal('unknown')
+    expect(colorsys.getColorEncoding({c: 150, m: 0.2, y: 0.5, k: 4})).to.equal('cmyk')
+  })
 })
 
