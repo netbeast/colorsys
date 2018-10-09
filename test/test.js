@@ -101,5 +101,17 @@ describe('colorsys', function() {
     expect(colorsys.getColorEncoding({j: 150, f: 0.2, r: 0.5})).to.equal('unknown')
     expect(colorsys.getColorEncoding({c: 150, m: 0.2, y: 0.5, k: 4})).to.equal('cmyk')
   })
+
+  it('should make a color darker', function () {
+    expect(colorsys.darken('#FFAA00', 0.5)).to.equal('#805500')
+    expect(colorsys.darken({r: 50, g: 170, b: 0}, 0.1)).to.deep.equal({r: 46, g: 153, b: 0})
+    expect(colorsys.darken({h: 222.3529411764705, s: 100, v: 66.66666666666666}, 0.2))
+      .to.deep.equal({h: 222.3529411764705, s: 100, v: 53})
+    expect(colorsys.darken({c: 0, m: 38, y: 100, k: 0}, 0.4))
+      .to.deep.equal({c: 0, m: 38, y: 100, k: 40})
+    expect(colorsys.darken({h: 50, s: 80, l: 100}, 0.8))
+      .deep.equal({h: 50, s: 80, l: 20})
+    expect('Bad color input case').equal('Bad color input case')
+  })
 })
 
