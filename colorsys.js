@@ -1,4 +1,3 @@
-
 const RGB_MAX = 255
 const HUE_MAX = 360
 const SV_MAX = 100
@@ -332,21 +331,18 @@ colorsys.stringify = function (obj) {
   return prefix + '(' + values.join(', ') + ')'
 }
 
-// Google Assistant API uses this format in SmartHome Apps. Example => "spectrumRGB": 16711680
+// Google Assistant API uses this format in SmartHome Apps. Example => 'spectrumRGB': 16711680
 colorsys.hex_to_decimal = colorsys.hexToDecimal = colorsys.hex2Decimal
 
 colorsys.hex2Decimal = function(hexColor) {
-  if (typeof hexColor === "string") {
-    return parseInt(hexColor.replace("#", ""), 16)
-  }
+  return parseInt(hexColor.replace('#', ''), 16)
 }
+
 colorsys.decimal_to_hex = colorsys.decimalToHex = colorsys.decimal2Hex
 
 colorsys.decimal2Hex = function(decimalColor) {
-  if (typeof decimalColor === "string") {
-    return "#" + parseInt(decimalColor).toString(16)
-  }
-  return "#" + decimalColor.toString(16)
+  const hexInBase16 = parseInt(decimalColor).toString(16)
+  return `#${padWithZeros(hexInBase16)}`
 }
 
 // Will return a random hex colour
@@ -415,6 +411,14 @@ function _hue2Rgb (p, q, t) {
   if (t < 1 / 2) return q
   if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
   return p
+}
+
+function padWithZeros (num) {
+  var s = String(num)
+  while (s.length < 6) {
+    s = '0' + s
+  }
+  return s
 }
 
 // It's easier to change luminosity in HSL
