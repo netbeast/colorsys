@@ -1,4 +1,3 @@
-
 const RGB_MAX = 255
 const HUE_MAX = 360
 const SV_MAX = 100
@@ -344,9 +343,17 @@ colorsys.decimal_to_hex = colorsys.decimalToHex = colorsys.decimal2Hex
 
 colorsys.decimal2Hex = function(decimalColor) {
   if (typeof decimalColor === "string") {
-    return "#" + parseInt(decimalColor).toString(16)
+    let hex = parseInt(decimalColor).toString(16)
+    while (hex.length < 6) {
+      hex = "0" + hex
+    }
+    return "#" + hex
   }
-  return "#" + decimalColor.toString(16)
+  let hex = decimalColor.toString(16)
+  while (hex.length < 6) {
+    hex = "0" + hex
+  }
+  return "#" + hex
 }
 
 // Will return a random hex colour
