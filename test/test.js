@@ -46,10 +46,16 @@ describe('colorsys', function() {
     expect(colorsys.cmyk2Rgb(cmyk)).to.deep.equal(white)
   })
 
-  it('should parse from css', function () {
+  it('should parse hsla from css', function () {
     const expectedHsla = { h: 140, s: 30, l: 21, a: 0.5 }
     const hslaString = 'hsla(140, 30%, 21%, .5)'
     expect(colorsys.parseCss(hslaString)).to.deep.equal(expectedHsla)
+  })
+
+  it('should parse rgba from css', function () {
+    const expectedRgba = { r: 115, g: 115, b: 115, a: 0.2 }
+    const rgbaString = 'rgba(115, 115, 115, .2)'
+    expect(colorsys.parseCss(rgbaString)).to.deep.equal(expectedRgba)
   })
 
   it('should parse css string as rgb by default', function () {
