@@ -388,19 +388,23 @@ colorsys.getColorEncoding = function (color) {
     return 'unknown'
   }
 
-  if (color.r && color.g && color.b) {
+  // Now check that the sum of the components is still a number
+  // And different than NaN (for that the boolean check)
+  const c = color
+
+  if ((c.r + c.g + c.b) && typeof (c.r + c.g + c.b) === 'number') {
     return 'rgb'
   }
 
-  if (color.h && color.s && color.v) {
+  if ((c.h + c.s + c.v) && typeof (c.h + c.s + c.v) === 'number') {
     return 'hsv'
   }
 
-  if (color.h && color.s && color.l) {
+  if ((c.h + c.s + c.l) && typeof (c.h + c.s + c.l) === 'number') {
     return 'hsl'
   }
 
-  if (color.c && color.m && color.y && color.k) {
+  if ((c.c + c.m + c.y + c.k) && typeof (c.c + c.m + c.y + c.k) === 'number') {
     return 'cmyk'
   }
 
@@ -420,36 +424,63 @@ function _hue2Rgb (p, q, t) {
   return p
 }
 
+// It's easier to change luminosity in HSL
+colorsys.any2Hsl = function (color) {
+  const colorEncoding = colorsys.getColorEncoding(color)
+
+  switch (colorEncoding) {
+    case 'hsl':
+      return color
+    case 'rgb':
+      return colorsys.rgb2Hsl(color)
+    case 'hex':
+      return colorsys.hex2Hsl(color)
+    case 'hsv':
+      return colorsys.hsv2Hsl(color)
+    case 'cmyk':
+      return colorsys.rgb2Hsl(colorsys.cmyk2Rgb(color))
+    default:
+      return 'unknown'
+  }
+}
+
+// Aliases
+colorsys.any_to_hsl = colorsys.anyToHsl = colorsys.any2Hsl
+
+// Will return the transforming to encode function
+// or undefined
+colorsys.getTransformEncodingFunction = function (color, desiredEncoding) {
+  const originalEncoding = colorsys.getColorEncoding(color)
+  return colorsys[originalEncoding + '_to_' + desiredEncoding]
+}
+
 // TODO:
 // Create darken / lighten methods with same input/output format
+colorsys.darken = function (color, percentage) {
+  const encoding = colorsys.getColorEncoding(color)
 
-//
-// colorsys.darken = function (color) {
-//   const colorEncoding = colorsys.getColorEncoding(color)
-//   if (colorEncoding === 'unknown') {
-//     return color
-//   }
+  if (encoding === 'unknown') {
+    return color
+  }
 
-//   const hsv = _getColorInHsv(color)
-//   return 
-// }
+  // Missing transformation function between hsl and cmyk
+  // Also, this algo is simple and precise
+  if (encoding === 'cmyk') {
+    const nextCmyk = color
+    nextCmyk.k = Math.min(100, 100 * percentage + nextCmyk.k)
+    return nextCmyk
+  }
 
-//
-// function _getColorInHsv (color) {
-//   const colorEncoding = colorsys.getColorEncoding(color)
+  const hsl = colorsys.any2Hsl(color)
+  const nextHsl = {h: hsl.h, s: hsl.s, l: Math.round(hsl.l * (1 - percentage))}
 
-//   switch (colorEncoding) {
-//     case 'hsv':
-//       return color
-//     case 'rgb':
-//       return rgb2Hsv(color)
-//     case 'hex':
-//       return hex2Hsv(color)
-//     case 'hsl':
-//       return hsl2Hsv(color)
-//     case 'cmyk':
-//       return rgb2Hsv(cmyk2Rgb(color))
-//     default:
-//       return 'unknown'
-//   }
-// }
+  const transformFn = encoding === 'hsl'
+    ? c => c // If HSL return as incame
+    : colorsys.getTransformEncodingFunction(nextHsl, encoding)
+
+  if (typeof transformFn !== 'function') {
+    return color
+  }
+
+  return transformFn(nextHsl)
+}
