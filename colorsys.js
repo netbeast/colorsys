@@ -332,6 +332,23 @@ colorsys.stringify = function (obj) {
   return prefix + '(' + values.join(', ') + ')'
 }
 
+// Google Assistant API uses this format in SmartHome Apps. Example => "spectrumRGB": 16711680
+colorsys.hex_to_decimal = colorsys.hexToDecimal = colorsys.hex2Decimal
+
+colorsys.hex2Decimal = function(hexColor) {
+  if (typeof hexColor === "string") {
+    return parseInt(hexColor.replace("#", ""), 16)
+  }
+}
+colorsys.decimal_to_hex = colorsys.decimalToHex = colorsys.decimal2Hex
+
+colorsys.decimal2Hex = function(decimalColor) {
+  if (typeof decimalColor === "string") {
+    return "#" + parseInt(decimalColor).toString(16)
+  }
+  return "#" + decimalColor.toString(16)
+}
+
 // Will return a random hex colour
 colorsys.random = function () {
   const base = '000000'
