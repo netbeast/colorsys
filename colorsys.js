@@ -341,8 +341,8 @@ colorsys.hex2Decimal = function(hexColor) {
 colorsys.decimal_to_hex = colorsys.decimalToHex = colorsys.decimal2Hex
 
 colorsys.decimal2Hex = function(decimalColor) {
-  const hex = '000000' + parseInt(decimalColor).toString(16)
-  return `#${hex}`
+  const hexInBase16 = parseInt(decimalColor).toString(16)
+  return `#${padWithZeros(hexInBase16)}`
 }
 
 // Will return a random hex colour
@@ -411,6 +411,14 @@ function _hue2Rgb (p, q, t) {
   if (t < 1 / 2) return q
   if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6
   return p
+}
+
+function padWithZeros (num) {
+  var s = String(num)
+  while (s.length < 6) {
+    s = '0' + s
+  }
+  return s
 }
 
 // It's easier to change luminosity in HSL
