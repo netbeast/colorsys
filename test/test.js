@@ -13,6 +13,15 @@ describe('colorsys', function() {
     expect(rgb).to.deep.equal({ r: 255, g: 255, b: 255 })
   })
 
+  it("should convert hex <-> decimal", function() {
+    const decimal = colorsys.hex2Decimal("#66d7a9")
+    expect(decimal).to.equal(6739881)
+    let hex = colorsys.decimal2Hex(6739881)
+    expect(hex).to.equal("#66d7a9")
+    hex = colorsys.decimal2Hex("6739881")
+    expect(hex).to.equal("#66d7a9")
+  })
+
   it('should convert hex <-> rgb', function() {
     const hex = colorsys.rgb_to_hex({ r: 255, g: 0, b: 255 })
     expect(hex).to.equal('#ff00ff')
