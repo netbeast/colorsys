@@ -2,6 +2,7 @@
   "name": "colorsys",
   "description": "Bidirectional conversions between different colors format like RGB, HSL, HSV and HEX",
   "main": "colorsys.js",
+  "types": "colorsys.d.ts",
   "version": "1.0.21",
   "authors": [
     "pablo@netbeast.co",
