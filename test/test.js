@@ -22,6 +22,15 @@ describe('colorsys', function() {
     expect(hex).to.equal('#66d7a9')
   })
 
+  it('should convert short hex <-> decimal', function() {
+    const decimal = colorsys.hex2Decimal('#09F')
+    expect(decimal).to.equal(39423)
+    let hex = colorsys.decimal2Hex(39423)
+    expect(hex).to.equal('#0099ff')
+    hex = colorsys.decimal2Hex('39423')
+    expect(hex).to.equal('#0099ff')
+  })
+
   it('should convert decimal integers to hex string', function () {
     const hex = colorsys.decimal2Hex(3359829)
     expect(hex).to.equal('#334455')
@@ -73,8 +82,10 @@ describe('colorsys', function() {
   })
 
   it('should parse css string as rgb by default', function () {
-    const hexParsed = colorsys.parseCss('#aacc33')
+    let hexParsed = colorsys.parseCss('#aacc33')
     expect(hexParsed).to.deep.equal(colorsys.hex2Rgb('#aacc33'))
+    hexParsed = colorsys.parseCss('#09F')
+    expect(hexParsed).to.deep.equal(colorsys.hex2Rgb('#0099ff'))
   })
 
   it('should stringify color objects', function () {
