@@ -173,12 +173,25 @@ colorsys.rgb2Hex = function (r, g, b) {
 colorsys.rgb_to_hex = colorsys.rgbToHex = colorsys.rgb2Hex
 
 colorsys.hex2Rgb = function (hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null
+  // Manage shorthand hexadecimal form
+  var result = /^#?([a-f\d])([a-f\d])([a-f\d])$/i.exec(hex)
+  if (result) {
+    return {
+      r: parseInt(`${result[1]}${result[1]}`, 16),
+      g: parseInt(`${result[2]}${result[2]}`, 16),
+      b: parseInt(`${result[3]}${result[3]}`, 16)
+    }
+  }
+  // Manage hexadecimal form
+  result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  if (result) {
+    return {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    }
+  }
+  return null
 }
 
 colorsys.hex_to_rgb = colorsys.hexToRgb = colorsys.hex2Rgb
@@ -335,7 +348,11 @@ colorsys.stringify = function (obj) {
 colorsys.hex_to_decimal = colorsys.hexToDecimal = colorsys.hex2Decimal
 
 colorsys.hex2Decimal = function(hexColor) {
-  return parseInt(hexColor.replace('#', ''), 16)
+  const hex = hexColor.replace('#', '')
+  if (hex.length === 3) {
+    return parseInt(`${hex[1]}${hex[1]}${hex[2]}${hex[2]}${hex[3]}${hex[3]}`, 16)
+  }
+  return parseInt(hex, 16)
 }
 
 colorsys.decimal_to_hex = colorsys.decimalToHex = colorsys.decimal2Hex
